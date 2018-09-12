@@ -14,6 +14,7 @@ namespace NetUnitTest
             void Test(string value) => Assert.AreEqual(value.ToHiragana_VB(), value.ToHiragana());
 
             Test("");
+            Test(KanaConversion.Asciis);
         }
     }
 
