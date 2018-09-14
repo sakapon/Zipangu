@@ -53,7 +53,23 @@ namespace Zipangu
         {
             if (value == null) return null;
 
-            throw new NotImplementedException();
+            var current = value;
+            current = VoicedPattern.Replace(current, m =>
+            {
+                var c = m.Value[0];
+                return VoicedMap.ContainsKey(c) ? VoicedMap[c].ToString() : m.Value;
+            });
+            current = SemiVoicedPattern.Replace(current, m =>
+            {
+                var c = m.Value[0];
+                return SemiVoicedMap.ContainsKey(c) ? SemiVoicedMap[c].ToString() : m.Value;
+            });
+            return string.Concat(current.Select(ToOneHiragana));
         }
+
+        static char ToOneHiragana(this char c) =>
+            KanaMap.ContainsKey(c) ? KanaMap[c] :
+            AsciiMap.ContainsKey(c) ? AsciiMap[c] :
+            c;
     }
 }
