@@ -9,6 +9,9 @@ namespace NetUnitTest
     [TestClass]
     public class KanaConversionTest
     {
+        const string VoiceableKatakanas = "ｳｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾊﾋﾌﾍﾎ";
+        const string SemiVoiceableKatakanas = "ﾊﾋﾌﾍﾎ";
+
         [TestMethod]
         public void ToHiragana()
         {
@@ -16,6 +19,9 @@ namespace NetUnitTest
 
             Test("");
             Test(KanaConversion.Asciis);
+            Test(KanaConversion.HalfKatakanas);
+            Test(string.Concat(VoiceableKatakanas.Select(c => $"{c}ﾞ")));
+            Test(string.Concat(SemiVoiceableKatakanas.Select(c => $"{c}ﾞ")));
         }
 
         [TestMethod]
