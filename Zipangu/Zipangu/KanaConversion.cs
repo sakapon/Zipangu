@@ -1,8 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Zipangu
 {
+    /// <summary>
+    /// かなを変換するためのメソッドを提供します。
+    /// </summary>
     public static class KanaConversion
     {
         /// <summary>半角英数字記号 (ASCII 文字)。</summary>
@@ -28,6 +33,14 @@ namespace Zipangu
         const string SemiVoiceableKatakanas = "ﾊﾋﾌﾍﾎ";
         /// <summary>半濁音のひらがな。</summary>
         const string SemiVoicedHiraganas = "ぱぴぷぺぽ";
+
+        static readonly IDictionary<char, char> AsciiMap = Asciis.Zip(WideAsciis, (x, y) => new { x, y }).ToDictionary(_ => _.x, _ => _.y);
+        static readonly IDictionary<char, char> KanaMap = HalfKatakanas.Zip(Hiraganas, (x, y) => new { x, y }).ToDictionary(_ => _.x, _ => _.y);
+        static readonly IDictionary<char, char> VoicedMap = VoiceableKatakanas.Zip(VoicedHiraganas, (x, y) => new { x, y }).ToDictionary(_ => _.x, _ => _.y);
+        static readonly IDictionary<char, char> SemiVoicedMap = SemiVoiceableKatakanas.Zip(SemiVoicedHiraganas, (x, y) => new { x, y }).ToDictionary(_ => _.x, _ => _.y);
+
+        static readonly Regex VoicedPattern = new Regex(".ﾞ");
+        static readonly Regex SemiVoicedPattern = new Regex(".ﾟ");
 
         /// <summary>
         /// 全角カタカナおよび半角カタカナをひらがなに変換します。
