@@ -28,7 +28,7 @@ namespace Zipangu
         public static string ToWideAscii(this string value) => value == null ? null : string.Concat(value.Select(ToWideAscii));
 
         /// <summary>
-        /// 全角英数字記号を半角 (ASCII 文字) に変換します。
+        /// 全角英数字記号 (ASCII 文字) を半角に変換します。
         /// </summary>
         /// <param name="value">変換対象の文字列。</param>
         /// <returns>変換後の文字列。</returns>

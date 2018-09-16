@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using Microsoft.VisualBasic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Zipangu;
 
@@ -15,7 +14,7 @@ namespace NetUnitTest
         [TestMethod]
         public void ToHiragana()
         {
-            void Test(string value) => Assert.AreEqual(value.ToHiragana_VB(), value.ToHiragana());
+            void Test(string value) => Assert.AreEqual(value.ToWideHiragana_VB(), value.ToHiragana());
 
             Test("");
             Test(KanaConversion.Asciis);
@@ -34,19 +33,13 @@ namespace NetUnitTest
         public void ToHiragana_Original()
         {
             var changed = Enumerable.Range(0, char.MaxValue + 1)
-                .Select(i => new { i, before = (char)i, after = ((char)i).ToString().ToHiragana_VB().Single() })
+                .Select(i => new { i, before = (char)i, after = ((char)i).ToString().ToWideHiragana_VB().Single() })
                 .Where(_ => _.before != _.after)
                 .Where(_ => _.after != '？' || _.before == '?')
                 .ToArray();
 
             foreach (var _ in changed)
-                Console.WriteLine($"{_.i:D5}: {_.before} > {_.after}");
+                Console.WriteLine($"{_.i:D5}-{_.i:X4}: {_.before} > {_.after}");
         }
-    }
-
-    public static class VBStringsHelper
-    {
-        public static string ToHiragana_VB(this string value) =>
-            Strings.StrConv(value, VbStrConv.Wide | VbStrConv.Hiragana);
     }
 }
