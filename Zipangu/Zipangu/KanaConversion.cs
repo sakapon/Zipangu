@@ -20,7 +20,7 @@ namespace Zipangu
         /// <summary>濁音となる半角カタカナ。</summary>
         internal const string VoiceableKatakanas = "ｳｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾊﾋﾌﾍﾎ";
         /// <summary>濁音のひらがな。</summary>
-        internal const string VoicedHiraganas = "ヴがぎぐげござじずぜぞだぢづでどばびぶべぼ";
+        internal const string VoicedHiraganas = "ゔがぎぐげござじずぜぞだぢづでどばびぶべぼ";
 
         /// <summary>半角カタカナの半濁点。</summary>
         const char SemiVoicedSoundMark = 'ﾟ';
@@ -30,11 +30,11 @@ namespace Zipangu
         internal const string SemiVoicedHiraganas = "ぱぴぷぺぽ";
 
         static readonly IDictionary<char, char> KanaMap = HalfKatakanas.ZipToDictionary(HiraganasByHalfKatakana);
-        static readonly IDictionary<char, char> VoicedMap = VoiceableKatakanas.Zip(VoicedHiraganas, (x, y) => new { x, y }).ToDictionary(_ => _.x, _ => _.y);
-        static readonly IDictionary<char, char> SemiVoicedMap = SemiVoiceableKatakanas.Zip(SemiVoicedHiraganas, (x, y) => new { x, y }).ToDictionary(_ => _.x, _ => _.y);
+        static readonly IDictionary<string, string> VoicedMap = VoiceableKatakanas.Zip(VoicedHiraganas, (x, y) => new { k = $"{x}ﾞ", v = y.ToString() })
+            .Concat(SemiVoiceableKatakanas.Zip(SemiVoicedHiraganas, (x, y) => new { k = $"{x}ﾟ", v = y.ToString() }))
+            .ToDictionary(_ => _.k, _ => _.v);
 
-        static readonly Regex VoicedPattern = new Regex(".ﾞ");
-        static readonly Regex SemiVoicedPattern = new Regex(".ﾟ");
+        static readonly Regex VoicedPattern = new Regex(".[ﾞﾟ]");
 
         /// <summary>
         /// 半角カタカナをひらがなに変換します。
@@ -44,18 +44,7 @@ namespace Zipangu
         public static string HalfKatakanaToHiragana(this string value)
         {
             if (value == null) return null;
-
-            var current = value;
-            current = VoicedPattern.Replace(current, m =>
-            {
-                var c = m.Value[0];
-                return VoicedMap.ContainsKey(c) ? VoicedMap[c].ToString() : m.Value;
-            });
-            current = SemiVoicedPattern.Replace(current, m =>
-            {
-                var c = m.Value[0];
-                return SemiVoicedMap.ContainsKey(c) ? SemiVoicedMap[c].ToString() : m.Value;
-            });
+            var current = VoicedPattern.Replace(value, m => VoicedMap.ContainsKey(m.Value) ? VoicedMap[m.Value] : m.Value);
             return string.Concat(current.Select(ToOneHiragana));
         }
 
