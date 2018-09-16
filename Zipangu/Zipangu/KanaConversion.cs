@@ -13,21 +13,21 @@ namespace Zipangu
         /// <summary>半角カタカナ。</summary>
         internal static readonly string HalfKatakanas = EnumerableHelper.RangeChars('｡', 'ﾟ');
         /// <summary>ひらがな。</summary>
-        const string HiraganasByHalfKatakana = "。「」、・をぁぃぅぇぉゃゅょっーあいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわん゛゜";
+        internal const string HiraganasByHalfKatakana = "。「」、・をぁぃぅぇぉゃゅょっーあいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわん゛゜";
 
         /// <summary>半角カタカナの濁点。</summary>
         const char VoicedSoundMark = 'ﾞ';
         /// <summary>濁音となる半角カタカナ。</summary>
-        const string VoiceableKatakanas = "ｳｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾊﾋﾌﾍﾎ";
+        internal const string VoiceableKatakanas = "ｳｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾊﾋﾌﾍﾎ";
         /// <summary>濁音のひらがな。</summary>
-        const string VoicedHiraganas = "ヴがぎぐげござじずぜぞだぢづでどばびぶべぼ";
+        internal const string VoicedHiraganas = "ヴがぎぐげござじずぜぞだぢづでどばびぶべぼ";
 
         /// <summary>半角カタカナの半濁点。</summary>
         const char SemiVoicedSoundMark = 'ﾟ';
         /// <summary>半濁音となる半角カタカナ。</summary>
-        const string SemiVoiceableKatakanas = "ﾊﾋﾌﾍﾎ";
+        internal const string SemiVoiceableKatakanas = "ﾊﾋﾌﾍﾎ";
         /// <summary>半濁音のひらがな。</summary>
-        const string SemiVoicedHiraganas = "ぱぴぷぺぽ";
+        internal const string SemiVoicedHiraganas = "ぱぴぷぺぽ";
 
         static readonly IDictionary<char, char> KanaMap = HalfKatakanas.ZipToDictionary(HiraganasByHalfKatakana);
         static readonly IDictionary<char, char> VoicedMap = VoiceableKatakanas.Zip(VoicedHiraganas, (x, y) => new { x, y }).ToDictionary(_ => _.x, _ => _.y);
@@ -37,13 +37,11 @@ namespace Zipangu
         static readonly Regex SemiVoicedPattern = new Regex(".ﾟ");
 
         /// <summary>
-        /// 全角カタカナおよび半角カタカナをひらがなに変換します。
-        /// また、半角英数字記号 (ASCII 文字) を全角に変換します。
-        /// <c>Microsoft.VisualBasic.Strings.StrConv(value, VbStrConv.Wide | VbStrConv.Hiragana)</c> と同等です。
+        /// 半角カタカナをひらがなに変換します。
         /// </summary>
         /// <param name="value">変換対象の文字列。</param>
         /// <returns>変換後の文字列。</returns>
-        public static string ToHiragana(this string value)
+        public static string HalfKatakanaToHiragana(this string value)
         {
             if (value == null) return null;
 

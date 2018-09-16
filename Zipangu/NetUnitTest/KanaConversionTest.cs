@@ -8,24 +8,37 @@ namespace NetUnitTest
     [TestClass]
     public class KanaConversionTest
     {
-        const string VoiceableKatakanas = "ｳｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾊﾋﾌﾍﾎ";
-        const string SemiVoiceableKatakanas = "ﾊﾋﾌﾍﾎ";
-
         [TestMethod]
-        public void ToHiragana()
+        public void HalfKatakanaToHiragana()
         {
-            void Test(string value) => Assert.AreEqual(value.ToWideHiragana_VB(), value.ToHiragana());
+            var Test = TestHelper.CreateAssertion<string, string>(KanaConversion.HalfKatakanaToHiragana);
 
-            Test("");
-            Test(KanaConversion.HalfKatakanas);
-            Test(string.Concat(VoiceableKatakanas.Select(c => $"{c}ﾞ")));
-            Test(string.Concat(SemiVoiceableKatakanas.Select(c => $"{c}ﾞ")));
+            Test(null, null);
+            Test("", "");
+            Test(KanaConversion.HalfKatakanas, KanaConversion.HiraganasByHalfKatakana);
+            Test(string.Concat(KanaConversion.VoiceableKatakanas.Select(c => $"{c}ﾞ")), KanaConversion.VoicedHiraganas);
+            Test(string.Concat(KanaConversion.SemiVoiceableKatakanas.Select(c => $"{c}ﾟ")), KanaConversion.SemiVoicedHiraganas);
+
+            var chars = EnumerableHelper.RangeChars(char.MinValue, char.MaxValue)
+                .Replace(KanaConversion.HalfKatakanas, "");
+            foreach (var c in chars)
+                Test(c.ToString(), c.ToString());
         }
 
         [TestMethod]
-        public void ToHiragana_Null()
+        public void HalfKatakanaToHiragana_VB()
         {
-            Assert.IsNull(default(string).ToHiragana());
+            void Test(string value) => Assert.AreEqual(value.ToWideHiragana_VB(), value.HalfKatakanaToHiragana());
+            var Test_VB = TestHelper.CreateAssertion<string, string>(VBStringsHelper.ToWideHiragana_VB);
+
+            Test("");
+            Test(KanaConversion.HalfKatakanas);
+            Test(string.Concat(KanaConversion.VoiceableKatakanas.Replace("ｳ", "").Select(c => $"{c}ﾞ")));
+            Test(string.Concat(KanaConversion.SemiVoiceableKatakanas.Select(c => $"{c}ﾟ")));
+
+            Test_VB(null, "");
+            // カタカナの "ヴ" に変換されます。
+            Test_VB("ｳﾞ", "ヴ");
         }
 
         [TestMethod]
