@@ -17,7 +17,6 @@ namespace NetUnitTest
             void Test(string value) => Assert.AreEqual(value.ToWideHiragana_VB(), value.ToHiragana());
 
             Test("");
-            Test(KanaConversion.Asciis);
             Test(KanaConversion.HalfKatakanas);
             Test(string.Concat(VoiceableKatakanas.Select(c => $"{c}ﾞ")));
             Test(string.Concat(SemiVoiceableKatakanas.Select(c => $"{c}ﾞ")));

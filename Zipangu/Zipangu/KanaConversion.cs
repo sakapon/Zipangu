@@ -10,15 +10,10 @@ namespace Zipangu
     /// </summary>
     public static class KanaConversion
     {
-        /// <summary>半角英数字記号 (ASCII 文字)。</summary>
-        internal static readonly string Asciis = string.Concat(Enumerable.Range(32, 95).Select(i => (char)i));
-        /// <summary>全角英数字記号。<c>'\'</c> は変換されません。</summary>
-        const string WideAsciis = @"　！＂＃＄％＆＇（）＊＋，－．／０１２３４５６７８９：；＜＝＞？＠ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ［\］＾＿｀ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ｛｜｝～";
-
         /// <summary>半角カタカナ。</summary>
-        internal static readonly string HalfKatakanas = string.Concat(Enumerable.Range('｡', 'ﾟ' - '｡' + 1).Select(i => (char)i));
+        internal static readonly string HalfKatakanas = EnumerableHelper.RangeChars('｡', 'ﾟ');
         /// <summary>ひらがな。</summary>
-        const string Hiraganas = "。「」、・をぁぃぅぇぉゃゅょっーあいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわん゛゜";
+        const string HiraganasByHalfKatakana = "。「」、・をぁぃぅぇぉゃゅょっーあいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわん゛゜";
 
         /// <summary>半角カタカナの濁点。</summary>
         const char VoicedSoundMark = 'ﾞ';
@@ -34,8 +29,7 @@ namespace Zipangu
         /// <summary>半濁音のひらがな。</summary>
         const string SemiVoicedHiraganas = "ぱぴぷぺぽ";
 
-        static readonly IDictionary<char, char> AsciiMap = Asciis.Zip(WideAsciis, (x, y) => new { x, y }).ToDictionary(_ => _.x, _ => _.y);
-        static readonly IDictionary<char, char> KanaMap = HalfKatakanas.Zip(Hiraganas, (x, y) => new { x, y }).ToDictionary(_ => _.x, _ => _.y);
+        static readonly IDictionary<char, char> KanaMap = HalfKatakanas.ZipToDictionary(HiraganasByHalfKatakana);
         static readonly IDictionary<char, char> VoicedMap = VoiceableKatakanas.Zip(VoicedHiraganas, (x, y) => new { x, y }).ToDictionary(_ => _.x, _ => _.y);
         static readonly IDictionary<char, char> SemiVoicedMap = SemiVoiceableKatakanas.Zip(SemiVoicedHiraganas, (x, y) => new { x, y }).ToDictionary(_ => _.x, _ => _.y);
 
@@ -67,9 +61,6 @@ namespace Zipangu
             return string.Concat(current.Select(ToOneHiragana));
         }
 
-        static char ToOneHiragana(this char c) =>
-            KanaMap.ContainsKey(c) ? KanaMap[c] :
-            AsciiMap.ContainsKey(c) ? AsciiMap[c] :
-            c;
+        static char ToOneHiragana(char c) => KanaMap.ContainsKey(c) ? KanaMap[c] : c;
     }
 }
