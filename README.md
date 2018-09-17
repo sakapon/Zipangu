@@ -17,6 +17,13 @@ Install-Package Zipangu
 
 [NuGet Gallery | Zipangu](https://www.nuget.org/packages/Zipangu/)
 
+## Features
+- 文字の変換
+  - ASCII → 全角 ASCII
+  - 全角 ASCII → ASCII
+  - 半角カタカナ → ひらがな
+  - 半角カタカナ → カタカナ
+
 ## Target Frameworks
 - .NET Standard 2.0
 - .NET Framework 4.0
