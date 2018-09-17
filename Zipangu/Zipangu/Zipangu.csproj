@@ -6,7 +6,8 @@
     <Title>Zipangu</Title>
     <AssemblyTitle>Zipangu</AssemblyTitle>
     <Product>KLibrary</Product>
-    <Description>A library for compatibility about Japan.</Description>
+    <Description>A library for compatibility about Japan.
+日本における互換性のためのライブラリです。</Description>
     <Authors>Keiho Sakapon</Authors>
     <Copyright>© 2018 Keiho Sakapon</Copyright>
     <PackageProjectUrl>https://github.com/sakapon/Zipangu</PackageProjectUrl>
