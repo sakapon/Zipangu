@@ -16,8 +16,8 @@ namespace NetUnitTest
             Test(null, null);
             Test("", "");
             Test(KanaConversion.HalfKatakanas, KanaConversion.HiraganasByHalfKatakana);
-            Test(string.Concat(KanaConversion.VoiceableKatakanas.Select(c => $"{c}ﾞ")), KanaConversion.VoicedHiraganas);
-            Test(string.Concat(KanaConversion.SemiVoiceableKatakanas.Select(c => $"{c}ﾟ")), KanaConversion.SemiVoicedHiraganas);
+            Test(string.Concat(KanaConversion.VoiceableHalfKatakanas.Select(c => $"{c}ﾞ")), KanaConversion.VoicedHiraganas);
+            Test(string.Concat(KanaConversion.SemiVoiceableHalfKatakanas.Select(c => $"{c}ﾟ")), KanaConversion.SemiVoicedHiraganas);
 
             var chars = EnumerableHelper.RangeChars(char.MinValue, char.MaxValue)
                 .Replace(KanaConversion.HalfKatakanas, "");
@@ -33,8 +33,8 @@ namespace NetUnitTest
 
             Test("");
             Test(KanaConversion.HalfKatakanas);
-            Test(string.Concat(KanaConversion.VoiceableKatakanas.Replace("ｳ", "").Select(c => $"{c}ﾞ")));
-            Test(string.Concat(KanaConversion.SemiVoiceableKatakanas.Select(c => $"{c}ﾟ")));
+            Test(string.Concat(KanaConversion.VoiceableHalfKatakanas.Replace("ｳ", "").Select(c => $"{c}ﾞ")));
+            Test(string.Concat(KanaConversion.SemiVoiceableHalfKatakanas.Select(c => $"{c}ﾟ")));
 
             Test_VB(null, "");
             // カタカナの "ヴ" に変換されます。
