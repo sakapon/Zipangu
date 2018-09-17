@@ -22,8 +22,6 @@ namespace Zipangu
         /// <summary>半角カタカナに対応するカタカナ。</summary>
         internal const string KatakanasByHalfKatakana = "。「」、・ヲァィゥェォャュョッーアイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワン゛゜";
 
-        /// <summary>半角カタカナの濁点。</summary>
-        const char VoicedSoundMark = 'ﾞ';
         /// <summary>濁音となる半角カタカナ。</summary>
         internal const string VoiceableHalfKatakanas = "ｳｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾊﾋﾌﾍﾎ";
         /// <summary>濁音のひらがな。</summary>
@@ -31,8 +29,6 @@ namespace Zipangu
         /// <summary>濁音のカタカナ。</summary>
         internal const string VoicedKatakanas = "ヴガギグゲゴザジズゼゾダヂヅデドバビブベボ";
 
-        /// <summary>半角カタカナの半濁点。</summary>
-        const char SemiVoicedSoundMark = 'ﾟ';
         /// <summary>半濁音となる半角カタカナ。</summary>
         internal const string SemiVoiceableHalfKatakanas = "ﾊﾋﾌﾍﾎ";
         /// <summary>半濁音のひらがな。</summary>
@@ -41,11 +37,18 @@ namespace Zipangu
         internal const string SemiVoicedKatakanas = "パピプペポ";
 
         static readonly IDictionary<char, char> HalfKatakanaToHiraganaMap = HalfKatakanas.ZipToDictionary(HiraganasByHalfKatakana);
+        static readonly IDictionary<char, char> HalfKatakanaToKatakanaMap = HalfKatakanas.ZipToDictionary(KatakanasByHalfKatakana);
         static readonly IDictionary<string, string> VoicedHiraganaMap = VoiceableHalfKatakanas.Zip(VoicedHiraganas, (x, y) => new { k = $"{x}ﾞ", v = y.ToString() })
             .Concat(SemiVoiceableHalfKatakanas.Zip(SemiVoicedHiraganas, (x, y) => new { k = $"{x}ﾟ", v = y.ToString() }))
             .ToDictionary(_ => _.k, _ => _.v);
+        static readonly IDictionary<string, string> VoicedKatakanaMap = VoiceableHalfKatakanas.Zip(VoicedKatakanas, (x, y) => new { k = $"{x}ﾞ", v = y.ToString() })
+            .Concat(SemiVoiceableHalfKatakanas.Zip(SemiVoicedKatakanas, (x, y) => new { k = $"{x}ﾟ", v = y.ToString() }))
+            .ToDictionary(_ => _.k, _ => _.v);
 
         static readonly Regex VoicedPattern = new Regex(".[ﾞﾟ]");
+
+        static char HalfKatakanaToOneHiragana(char c) => HalfKatakanaToHiraganaMap.ContainsKey(c) ? HalfKatakanaToHiraganaMap[c] : c;
+        static char HalfKatakanaToOneKatakana(char c) => HalfKatakanaToKatakanaMap.ContainsKey(c) ? HalfKatakanaToKatakanaMap[c] : c;
 
         /// <summary>
         /// 半角カタカナをひらがなに変換します。
@@ -59,6 +62,16 @@ namespace Zipangu
             return string.Concat(current.Select(HalfKatakanaToOneHiragana));
         }
 
-        static char HalfKatakanaToOneHiragana(char c) => HalfKatakanaToHiraganaMap.ContainsKey(c) ? HalfKatakanaToHiraganaMap[c] : c;
+        /// <summary>
+        /// 半角カタカナをカタカナに変換します。
+        /// </summary>
+        /// <param name="value">変換対象の文字列。</param>
+        /// <returns>変換後の文字列。</returns>
+        public static string HalfKatakanaToKatakana(this string value)
+        {
+            if (value == null) return null;
+            var current = VoicedPattern.Replace(value, m => VoicedKatakanaMap.ContainsKey(m.Value) ? VoicedKatakanaMap[m.Value] : m.Value);
+            return string.Concat(current.Select(HalfKatakanaToOneKatakana));
+        }
     }
 }
