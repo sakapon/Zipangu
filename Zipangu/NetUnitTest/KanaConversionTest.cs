@@ -19,6 +19,8 @@ namespace NetUnitTest
             Test(string.Concat(KanaConversion.VoiceableHalfKatakanas.Select(c => $"{c}ﾞ")), KanaConversion.VoicedHiraganas);
             Test(string.Concat(KanaConversion.SemiVoiceableHalfKatakanas.Select(c => $"{c}ﾟ")), KanaConversion.SemiVoicedHiraganas);
 
+            Test("ﾍﾞｰﾄｰｳﾞｪﾝ､｢ﾋﾟｱﾉ･ｿﾅﾀ｣｡", "べーとーゔぇん、「ぴあの・そなた」。");
+
             var chars = EnumerableHelper.RangeChars(char.MinValue, char.MaxValue)
                 .Replace(KanaConversion.HalfKatakanas, "");
             foreach (var c in chars)
@@ -52,6 +54,8 @@ namespace NetUnitTest
             Test(string.Concat(KanaConversion.VoiceableHalfKatakanas.Select(c => $"{c}ﾞ")), KanaConversion.VoicedKatakanas);
             Test(string.Concat(KanaConversion.SemiVoiceableHalfKatakanas.Select(c => $"{c}ﾟ")), KanaConversion.SemiVoicedKatakanas);
 
+            Test("ﾍﾞｰﾄｰｳﾞｪﾝ､｢ﾋﾟｱﾉ･ｿﾅﾀ｣｡", "ベートーヴェン、「ピアノ・ソナタ」。");
+
             var chars = EnumerableHelper.RangeChars(char.MinValue, char.MaxValue)
                 .Replace(KanaConversion.HalfKatakanas, "");
             foreach (var c in chars)
@@ -73,7 +77,7 @@ namespace NetUnitTest
         }
 
         [TestMethod]
-        public void ToHiragana_Original()
+        public void ToWideHiragana_Original()
         {
             var changed = Enumerable.Range(0, char.MaxValue + 1)
                 .Select(i => new { i, before = (char)i, after = ((char)i).ToString().ToWideHiragana_VB().Single() })
