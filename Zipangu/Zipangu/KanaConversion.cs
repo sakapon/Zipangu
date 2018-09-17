@@ -10,10 +10,17 @@ namespace Zipangu
     /// </summary>
     public static class KanaConversion
     {
+        /// <summary>ひらがな。</summary>
+        internal static readonly string Hiraganas = EnumerableHelper.RangeChars('ぁ', 'ゔ') + "ゝゞ";
+        /// <summary>カタカナ。</summary>
+        internal static readonly string Katakanas = EnumerableHelper.RangeChars('ァ', 'ヴ') + "ヽヾ";
         /// <summary>半角カタカナ。</summary>
         internal static readonly string HalfKatakanas = EnumerableHelper.RangeChars('｡', 'ﾟ');
-        /// <summary>ひらがな。</summary>
+
+        /// <summary>半角カタカナに対応するひらがな。</summary>
         internal const string HiraganasByHalfKatakana = "。「」、・をぁぃぅぇぉゃゅょっーあいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわん゛゜";
+        /// <summary>半角カタカナに対応するカタカナ。</summary>
+        internal const string KatakanasByHalfKatakana = "。「」、・ヲァィゥェォャュョッーアイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワン゛゜";
 
         /// <summary>半角カタカナの濁点。</summary>
         const char VoicedSoundMark = 'ﾞ';
@@ -21,6 +28,8 @@ namespace Zipangu
         internal const string VoiceableKatakanas = "ｳｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾊﾋﾌﾍﾎ";
         /// <summary>濁音のひらがな。</summary>
         internal const string VoicedHiraganas = "ゔがぎぐげござじずぜぞだぢづでどばびぶべぼ";
+        /// <summary>濁音のカタカナ。</summary>
+        internal const string VoicedKatakanas = "ヴガギグゲゴザジズゼゾダヂヅデドバビブベボ";
 
         /// <summary>半角カタカナの半濁点。</summary>
         const char SemiVoicedSoundMark = 'ﾟ';
@@ -28,6 +37,8 @@ namespace Zipangu
         internal const string SemiVoiceableKatakanas = "ﾊﾋﾌﾍﾎ";
         /// <summary>半濁音のひらがな。</summary>
         internal const string SemiVoicedHiraganas = "ぱぴぷぺぽ";
+        /// <summary>半濁音のカタカナ。</summary>
+        internal const string SemiVoicedKatakanas = "パピプペポ";
 
         static readonly IDictionary<char, char> KanaMap = HalfKatakanas.ZipToDictionary(HiraganasByHalfKatakana);
         static readonly IDictionary<string, string> VoicedMap = VoiceableKatakanas.Zip(VoicedHiraganas, (x, y) => new { k = $"{x}ﾞ", v = y.ToString() })
