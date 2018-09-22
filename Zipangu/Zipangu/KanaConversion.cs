@@ -50,9 +50,6 @@ namespace Zipangu
 
         static readonly Regex VoicedPattern = new Regex(".[ﾞﾟ]");
 
-        static char OneHalfKatakanaToHiragana(char c) => HalfKatakanaToHiraganaMap.ContainsKey(c) ? HalfKatakanaToHiraganaMap[c] : c;
-        static char OneHalfKatakanaToKatakana(char c) => HalfKatakanaToKatakanaMap.ContainsKey(c) ? HalfKatakanaToKatakanaMap[c] : c;
-
         /// <summary>
         /// 半角カタカナをひらがなに変換します。
         /// </summary>
@@ -62,7 +59,7 @@ namespace Zipangu
         {
             if (value == null) return null;
             var current = VoicedPattern.Replace(value, m => VoicedHiraganaMap.ContainsKey(m.Value) ? VoicedHiraganaMap[m.Value] : m.Value);
-            return string.Concat(current.Select(OneHalfKatakanaToHiragana));
+            return current.ReplaceByMap(HalfKatakanaToHiraganaMap);
         }
 
         /// <summary>
@@ -74,7 +71,7 @@ namespace Zipangu
         {
             if (value == null) return null;
             var current = VoicedPattern.Replace(value, m => VoicedKatakanaMap.ContainsKey(m.Value) ? VoicedKatakanaMap[m.Value] : m.Value);
-            return string.Concat(current.Select(OneHalfKatakanaToKatakana));
+            return current.ReplaceByMap(HalfKatakanaToKatakanaMap);
         }
     }
 }
