@@ -18,11 +18,28 @@ Install-Package Zipangu
 [NuGet Gallery | Zipangu](https://www.nuget.org/packages/Zipangu/)
 
 ## Features
-- 文字の変換
-  - ASCII → 全角 ASCII
-  - 全角 ASCII → ASCII
-  - 半角カタカナ → ひらがな
-  - 半角カタカナ → カタカナ
+### 文字の変換
+- ASCII 文字 → 全角 ASCII 文字
+- 全角 ASCII 文字 → ASCII 文字
+- 半角カタカナ → ひらがな
+- 半角カタカナ → カタカナ
+
+## Usage
+### 文字の変換
+まず、Zipangu 名前空間の using ディレクティブを追加します。
+```c#
+using System;
+using Zipangu;
+```
+
+各メソッドは拡張メソッドとして提供されています。
+```c#
+    static void Main(string[] args)
+    {
+        // べーとーゔぇん、「ぴあの・そなた」。
+        var converted = "ﾍﾞｰﾄｰｳﾞｪﾝ､｢ﾋﾟｱﾉ･ｿﾅﾀ｣｡".HalfKatakanaToHiragana();
+    }
+```
 
 ## Target Frameworks
 - .NET Standard 2.0
