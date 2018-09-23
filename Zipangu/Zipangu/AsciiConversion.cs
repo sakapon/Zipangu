@@ -6,6 +6,7 @@ namespace Zipangu
 {
     /// <summary>
     /// ASCII 文字を変換するためのメソッドを提供します。
+    /// <c>Microsoft.VisualBasic.Strings.StrConv</c> メソッドとの互換性はありません。
     /// </summary>
     public static class AsciiConversion
     {
@@ -22,13 +23,13 @@ namespace Zipangu
         /// </summary>
         /// <param name="value">変換対象の文字列。</param>
         /// <returns>変換後の文字列。</returns>
-        public static string ToWideAscii(this string value) => value == null ? null : value.ReplaceByMap(WideMap);
+        public static string AsciiToWide(this string value) => value == null ? null : value.ReplaceByMap(WideMap);
 
         /// <summary>
         /// 全角 ASCII 文字 (英数字記号) を半角に変換します。
         /// </summary>
         /// <param name="value">変換対象の文字列。</param>
         /// <returns>変換後の文字列。</returns>
-        public static string ToNarrowAscii(this string value) => value == null ? null : value.ReplaceByMap(NarrowMap);
+        public static string AsciiToNarrow(this string value) => value == null ? null : value.ReplaceByMap(NarrowMap);
     }
 }

@@ -9,9 +9,9 @@ namespace NetUnitTest
     public class AsciiConversionTest
     {
         [TestMethod]
-        public void ToWideAscii()
+        public void AsciiToWide()
         {
-            var Test = TestHelper.CreateAssertion<string, string>(AsciiConversion.ToWideAscii);
+            var Test = TestHelper.CreateAssertion<string, string>(AsciiConversion.AsciiToWide);
 
             Test(null, null);
             Test("", "");
@@ -24,9 +24,9 @@ namespace NetUnitTest
         }
 
         [TestMethod]
-        public void ToWideAscii_VB()
+        public void AsciiToWide_VB()
         {
-            void Test(string value) => Assert.AreEqual(value.ToWide_VB(), value.ToWideAscii());
+            void Test(string value) => Assert.AreEqual(value.ToWide_VB(), value.AsciiToWide());
             var Test_VB = TestHelper.CreateAssertion<string, string>(VBStringsHelper.ToWide_VB);
 
             Test("");
@@ -38,9 +38,9 @@ namespace NetUnitTest
         }
 
         [TestMethod]
-        public void ToNarrowAscii()
+        public void AsciiToNarrow()
         {
-            var Test = TestHelper.CreateAssertion<string, string>(AsciiConversion.ToNarrowAscii);
+            var Test = TestHelper.CreateAssertion<string, string>(AsciiConversion.AsciiToNarrow);
 
             Test(null, null);
             Test("", "");
@@ -53,9 +53,9 @@ namespace NetUnitTest
         }
 
         [TestMethod]
-        public void ToNarrowAscii_VB()
+        public void AsciiToNarrow_VB()
         {
-            void Test(string value) => Assert.AreEqual(value.ToNarrow_VB(), value.ToNarrowAscii());
+            void Test(string value) => Assert.AreEqual(value.ToNarrow_VB(), value.AsciiToNarrow());
             var Test_VB = TestHelper.CreateAssertion<string, string>(VBStringsHelper.ToNarrow_VB);
 
             Test("");
