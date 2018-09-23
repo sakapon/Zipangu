@@ -74,7 +74,7 @@ namespace Zipangu
         public static string HalfKatakanaToHiragana(this string value)
         {
             if (value == null) return null;
-            var current = VoicedPattern.Replace(value, m => VoicedHiraganaMap.ContainsKey(m.Value) ? VoicedHiraganaMap[m.Value] : m.Value);
+            var current = VoicedPattern.Replace(value, m => m.Value.ReplaceByMap(VoicedHiraganaMap));
             return current.ReplaceByMap(HalfKatakanaToHiraganaMap);
         }
 
@@ -86,7 +86,7 @@ namespace Zipangu
         public static string HalfKatakanaToKatakana(this string value)
         {
             if (value == null) return null;
-            var current = VoicedPattern.Replace(value, m => VoicedKatakanaMap.ContainsKey(m.Value) ? VoicedKatakanaMap[m.Value] : m.Value);
+            var current = VoicedPattern.Replace(value, m => m.Value.ReplaceByMap(VoicedKatakanaMap));
             return current.ReplaceByMap(HalfKatakanaToKatakanaMap);
         }
     }

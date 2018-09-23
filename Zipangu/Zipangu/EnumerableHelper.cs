@@ -12,7 +12,10 @@ namespace Zipangu
         public static string RangeChars(char start, char end) =>
             string.Concat(Enumerable.Range(start, end - start + 1).Select(i => (char)i));
 
+        internal static T ReplaceByMap<T>(this T value, IDictionary<T, T> map) =>
+            map.ContainsKey(value) ? map[value] : value;
+
         internal static string ReplaceByMap(this string value, IDictionary<char, char> map) =>
-            string.Concat(value.Select(c => map.ContainsKey(c) ? map[c] : c));
+            string.Concat(value.Select(c => c.ReplaceByMap(map)));
     }
 }
