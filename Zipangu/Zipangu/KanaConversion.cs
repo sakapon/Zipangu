@@ -36,6 +36,8 @@ namespace Zipangu
         /// <summary>半濁音のカタカナ。</summary>
         internal const string SemiVoicedKatakanas = "パピプペポ";
 
+        static readonly IDictionary<char, char> HiraganaToKatakanaMap = Hiraganas.ZipToDictionary(Katakanas);
+        static readonly IDictionary<char, char> KatakanaToHiraganaMap = Katakanas.ZipToDictionary(Hiraganas);
         static readonly IDictionary<char, char> HalfKatakanaToHiraganaMap = HalfKatakanas.ZipToDictionary(HiraganasByHalfKatakana);
         static readonly IDictionary<char, char> HalfKatakanaToKatakanaMap = HalfKatakanas.ZipToDictionary(KatakanasByHalfKatakana);
 
@@ -51,6 +53,20 @@ namespace Zipangu
         static readonly Regex VoicedPattern = new Regex(".[ﾞﾟ]");
 
         /// <summary>
+        /// ひらがなを全角カタカナに変換します。
+        /// </summary>
+        /// <param name="value">変換対象の文字列。</param>
+        /// <returns>変換後の文字列。</returns>
+        public static string HiraganaToKatakana(this string value) => value == null ? null : value.ReplaceByMap(HiraganaToKatakanaMap);
+
+        /// <summary>
+        /// 全角カタカナをひらがなに変換します。
+        /// </summary>
+        /// <param name="value">変換対象の文字列。</param>
+        /// <returns>変換後の文字列。</returns>
+        public static string KatakanaToHiragana(this string value) => value == null ? null : value.ReplaceByMap(KatakanaToHiraganaMap);
+
+        /// <summary>
         /// 半角カタカナをひらがなに変換します。
         /// </summary>
         /// <param name="value">変換対象の文字列。</param>
@@ -63,7 +79,7 @@ namespace Zipangu
         }
 
         /// <summary>
-        /// 半角カタカナをカタカナに変換します。
+        /// 半角カタカナを全角カタカナに変換します。
         /// </summary>
         /// <param name="value">変換対象の文字列。</param>
         /// <returns>変換後の文字列。</returns>
