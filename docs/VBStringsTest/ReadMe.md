@@ -1,0 +1,6 @@
+## VBStrings Test
+`Microsoft.VisualBasic.Strings.StrConv` メソッドにより変換される文字の一覧です。
+
+- 引数の `VbStrConv` 列挙体の値ごとにファイルがあります。
+- `?` または `？` に変換される文字は省略されています。
+  - 多くの文字 (他言語など、関連性の低い文字) が該当します。
