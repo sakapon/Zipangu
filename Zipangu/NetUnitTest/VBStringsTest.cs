@@ -66,6 +66,12 @@ namespace NetUnitTest
         public void Hiragana() => WriteChanged(VbStrConv.Hiragana);
 
         [TestMethod]
+        public void NarrowKatakana() => WriteChanged_Narrow(VbStrConv.Narrow | VbStrConv.Katakana);
+
+        [TestMethod]
+        public void NarrowHiragana() => WriteChanged_Narrow(VbStrConv.Narrow | VbStrConv.Hiragana);
+
+        [TestMethod]
         public void WideKatakana() => WriteChanged_Wide(VbStrConv.Wide | VbStrConv.Katakana);
 
         [TestMethod]
