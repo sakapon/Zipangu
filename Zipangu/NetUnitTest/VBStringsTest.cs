@@ -40,6 +40,22 @@ namespace NetUnitTest
             File.WriteAllLines($"VBStrings-{mode.ToString().Replace(", ", "")}.txt", changed, Encoding.UTF8);
         }
 
+        static void WriteChanged_Narrow(VbStrConv mode)
+        {
+            // 他言語の文字は "?" に変換されます。
+            var changed = EnumerableHelper.RangeChars(char.MinValue, char.MaxValue)
+                .Select(c => new { before = c, after = Strings.StrConv(c.ToString(), mode) })
+                .Where(_ => _.before.ToString() != _.after)
+                .Where(_ => _.after != "?" || _.before == '？')
+                .Select(_ => $"{ToMessage1(_.before)} > {(_.after.Length == 1 ? ToMessage2(_.after[0]) : _.after)}")
+                .ToArray();
+
+            File.WriteAllLines($"VBStrings-{mode.ToString().Replace(", ", "")}.txt", changed, Encoding.UTF8);
+        }
+
+        [TestMethod]
+        public void Narrow() => WriteChanged_Narrow(VbStrConv.Narrow);
+
         [TestMethod]
         public void Wide() => WriteChanged_Wide(VbStrConv.Wide);
 
