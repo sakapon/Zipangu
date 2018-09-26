@@ -24,7 +24,7 @@ namespace NetUnitTest
                 .Select(_ => $"{ToMessage1(_.before)} > {ToMessage2(_.after)}")
                 .ToArray();
 
-            File.WriteAllLines($"VBStrings-{mode}.txt", changed, Encoding.UTF8);
+            File.WriteAllLines($"VBStrings-{mode.ToString().Replace(", ", "")}.txt", changed, Encoding.UTF8);
         }
 
         static void WriteChanged_Wide(VbStrConv mode)
@@ -37,7 +37,7 @@ namespace NetUnitTest
                 .Select(_ => $"{ToMessage1(_.before)} > {ToMessage2(_.after)}")
                 .ToArray();
 
-            File.WriteAllLines($"VBStrings-{mode}.txt", changed, Encoding.UTF8);
+            File.WriteAllLines($"VBStrings-{mode.ToString().Replace(", ", "")}.txt", changed, Encoding.UTF8);
         }
 
         [TestMethod]
@@ -50,16 +50,9 @@ namespace NetUnitTest
         public void Hiragana() => WriteChanged(VbStrConv.Hiragana);
 
         [TestMethod]
-        public void ToWideHiragana_Original()
-        {
-            var changed = Enumerable.Range(0, char.MaxValue + 1)
-                .Select(i => new { i, before = (char)i, after = ((char)i).ToString().ToWideHiragana_VB().Single() })
-                .Where(_ => _.before != _.after)
-                .Where(_ => _.after != '？' || _.before == '?')
-                .ToArray();
+        public void WideKatakana() => WriteChanged_Wide(VbStrConv.Wide | VbStrConv.Katakana);
 
-            foreach (var _ in changed)
-                Console.WriteLine($"{_.i:D5}-{_.i:X4}: {_.before} > {_.after}");
-        }
+        [TestMethod]
+        public void WideHiragana() => WriteChanged_Wide(VbStrConv.Wide | VbStrConv.Hiragana);
     }
 }
