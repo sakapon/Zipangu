@@ -8,11 +8,20 @@ namespace NetUnitTest
     public class CharConversionTest
     {
         [TestMethod]
-        public void HiraganaToKatakana()
+        public void Convert()
         {
-            Assert.AreEqual("ベートーヴェン、「ピアノ・ソナタ」。", "ベートーヴェン、「ピアノ・ソナタ」。".Convert());
-            Assert.AreEqual("べーとーゔぇん、「ぴあの・そなた」。", "ベートーヴェン、「ピアノ・ソナタ」。".Convert(KanaConv.KatakanaToHiragana));
-            Assert.AreEqual("ベートーヴェン、「ピアノ・ソナタ」。", "べーとーゔぇん、「ぴあの・そなた」。".Convert(KanaConv.HiraganaToKatakana));
+            var input = "abcＸＹＺゔぃっぷヴィップｳﾞｨｯﾌﾟ";
+
+            Assert.AreEqual(input, input.Convert());
+            Assert.AreEqual("abcＸＹＺゔぃっぷゔぃっぷｳﾞｨｯﾌﾟ", input.Convert(KanaConv.KatakanaToHiragana));
+            Assert.AreEqual("abcＸＹＺゔぃっぷヴィップゔぃっぷ", input.Convert(KanaConv.HalfKatakanaToHiragana));
+            Assert.AreEqual("abcＸＹＺゔぃっぷゔぃっぷゔぃっぷ", input.Convert(KanaConv.AllKanaToHiragana));
+            Assert.AreEqual("abcＸＹＺヴィップヴィップｳﾞｨｯﾌﾟ", input.Convert(KanaConv.HiraganaToKatakana));
+            Assert.AreEqual("abcＸＹＺゔぃっぷヴィップヴィップ", input.Convert(KanaConv.HalfKatakanaToKatakana));
+            Assert.AreEqual("abcＸＹＺヴィップヴィップヴィップ", input.Convert(KanaConv.AllKanaToKatakana));
+
+            Assert.AreEqual("abcXYZゔぃっぷヴィップｳﾞｨｯﾌﾟ", input.Convert(KanaConv.None, AsciiConv.ToNarrow));
+            Assert.AreEqual("ａｂｃＸＹＺゔぃっぷヴィップｳﾞｨｯﾌﾟ", input.Convert(KanaConv.None, AsciiConv.ToWide));
         }
     }
 }

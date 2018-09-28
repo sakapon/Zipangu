@@ -11,10 +11,10 @@ namespace Zipangu
 
             var current = value;
 
-            if (ascii == AsciiConv.ToWide)
-                current = current.AsciiToWide();
-            else if (ascii == AsciiConv.ToNarrow)
+            if (ascii == AsciiConv.ToNarrow)
                 current = current.AsciiToNarrow();
+            else if (ascii == AsciiConv.ToWide)
+                current = current.AsciiToWide();
 
             if (kana.HasFlag(KanaConv.KatakanaToHiragana))
                 current = current.KatakanaToHiragana();
@@ -33,8 +33,8 @@ namespace Zipangu
     public enum AsciiConv
     {
         None,
-        ToWide,
         ToNarrow,
+        ToWide,
     }
 
     [Flags]
