@@ -6,32 +6,30 @@ namespace Zipangu
 {
     /// <summary>
     /// ASCII 文字を変換するためのメソッドを提供します。
+    /// <c>Microsoft.VisualBasic.Strings.StrConv</c> メソッドとの互換性はありません。
     /// </summary>
     public static class AsciiConversion
     {
-        /// <summary>半角英数字記号 (ASCII 文字)。</summary>
+        /// <summary>ASCII 文字。</summary>
         internal static readonly string Asciis = EnumerableHelper.RangeChars(' ', '~');
-        /// <summary>全角英数字記号。</summary>
+        /// <summary>全角 ASCII 文字。</summary>
         internal static readonly string WideAsciis = "　" + EnumerableHelper.RangeChars('！', '～');
 
         static readonly IDictionary<char, char> WideMap = Asciis.ZipToDictionary(WideAsciis);
         static readonly IDictionary<char, char> NarrowMap = WideAsciis.ZipToDictionary(Asciis);
 
-        internal static char ToWideAscii(char c) => WideMap.ContainsKey(c) ? WideMap[c] : c;
-        internal static char ToNarrowAscii(char c) => NarrowMap.ContainsKey(c) ? NarrowMap[c] : c;
-
         /// <summary>
-        /// 半角英数字記号 (ASCII 文字) を全角に変換します。
+        /// 半角 ASCII 文字 (英数字記号) を全角に変換します。
         /// </summary>
         /// <param name="value">変換対象の文字列。</param>
         /// <returns>変換後の文字列。</returns>
-        public static string ToWideAscii(this string value) => value == null ? null : string.Concat(value.Select(ToWideAscii));
+        public static string AsciiToWide(this string value) => value == null ? null : value.ReplaceByMap(WideMap);
 
         /// <summary>
-        /// 全角英数字記号 (ASCII 文字) を半角に変換します。
+        /// 全角 ASCII 文字 (英数字記号) を半角に変換します。
         /// </summary>
         /// <param name="value">変換対象の文字列。</param>
         /// <returns>変換後の文字列。</returns>
-        public static string ToNarrowAscii(this string value) => value == null ? null : string.Concat(value.Select(ToNarrowAscii));
+        public static string AsciiToNarrow(this string value) => value == null ? null : value.ReplaceByMap(NarrowMap);
     }
 }

@@ -7,6 +7,7 @@ namespace Zipangu
 {
     /// <summary>
     /// かなを変換するためのメソッドを提供します。
+    /// <c>Microsoft.VisualBasic.Strings.StrConv</c> メソッドとの互換性はありません。
     /// </summary>
     public static class KanaConversion
     {
@@ -36,6 +37,8 @@ namespace Zipangu
         /// <summary>半濁音のカタカナ。</summary>
         internal const string SemiVoicedKatakanas = "パピプペポ";
 
+        static readonly IDictionary<char, char> HiraganaToKatakanaMap = Hiraganas.ZipToDictionary(Katakanas);
+        static readonly IDictionary<char, char> KatakanaToHiraganaMap = Katakanas.ZipToDictionary(Hiraganas);
         static readonly IDictionary<char, char> HalfKatakanaToHiraganaMap = HalfKatakanas.ZipToDictionary(HiraganasByHalfKatakana);
         static readonly IDictionary<char, char> HalfKatakanaToKatakanaMap = HalfKatakanas.ZipToDictionary(KatakanasByHalfKatakana);
 
@@ -50,8 +53,19 @@ namespace Zipangu
 
         static readonly Regex VoicedPattern = new Regex(".[ﾞﾟ]");
 
-        static char OneHalfKatakanaToHiragana(char c) => HalfKatakanaToHiraganaMap.ContainsKey(c) ? HalfKatakanaToHiraganaMap[c] : c;
-        static char OneHalfKatakanaToKatakana(char c) => HalfKatakanaToKatakanaMap.ContainsKey(c) ? HalfKatakanaToKatakanaMap[c] : c;
+        /// <summary>
+        /// ひらがなを全角カタカナに変換します。
+        /// </summary>
+        /// <param name="value">変換対象の文字列。</param>
+        /// <returns>変換後の文字列。</returns>
+        public static string HiraganaToKatakana(this string value) => value == null ? null : value.ReplaceByMap(HiraganaToKatakanaMap);
+
+        /// <summary>
+        /// 全角カタカナをひらがなに変換します。
+        /// </summary>
+        /// <param name="value">変換対象の文字列。</param>
+        /// <returns>変換後の文字列。</returns>
+        public static string KatakanaToHiragana(this string value) => value == null ? null : value.ReplaceByMap(KatakanaToHiraganaMap);
 
         /// <summary>
         /// 半角カタカナをひらがなに変換します。
@@ -61,20 +75,20 @@ namespace Zipangu
         public static string HalfKatakanaToHiragana(this string value)
         {
             if (value == null) return null;
-            var current = VoicedPattern.Replace(value, m => VoicedHiraganaMap.ContainsKey(m.Value) ? VoicedHiraganaMap[m.Value] : m.Value);
-            return string.Concat(current.Select(OneHalfKatakanaToHiragana));
+            var current = VoicedPattern.Replace(value, m => m.Value.ReplaceByMap(VoicedHiraganaMap));
+            return current.ReplaceByMap(HalfKatakanaToHiraganaMap);
         }
 
         /// <summary>
-        /// 半角カタカナをカタカナに変換します。
+        /// 半角カタカナを全角カタカナに変換します。
         /// </summary>
         /// <param name="value">変換対象の文字列。</param>
         /// <returns>変換後の文字列。</returns>
         public static string HalfKatakanaToKatakana(this string value)
         {
             if (value == null) return null;
-            var current = VoicedPattern.Replace(value, m => VoicedKatakanaMap.ContainsKey(m.Value) ? VoicedKatakanaMap[m.Value] : m.Value);
-            return string.Concat(current.Select(OneHalfKatakanaToKatakana));
+            var current = VoicedPattern.Replace(value, m => m.Value.ReplaceByMap(VoicedKatakanaMap));
+            return current.ReplaceByMap(HalfKatakanaToKatakanaMap);
         }
     }
 }

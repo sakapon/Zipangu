@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net40</TargetFrameworks>
-    <Version>1.0.1</Version>
+    <Version>1.0.3</Version>
     <Title>Zipangu</Title>
     <AssemblyTitle>Zipangu</AssemblyTitle>
     <Product>KLibrary</Product>

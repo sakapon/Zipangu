@@ -9,6 +9,68 @@ namespace NetUnitTest
     public class KanaConversionTest
     {
         [TestMethod]
+        public void HiraganaToKatakana()
+        {
+            var Test = TestHelper.CreateAssertion<string, string>(KanaConversion.HiraganaToKatakana);
+
+            Test(null, null);
+            Test("", "");
+            Test(KanaConversion.Hiraganas, KanaConversion.Katakanas);
+
+            Test("べーとーゔぇん、「ぴあの・そなた」。", "ベートーヴェン、「ピアノ・ソナタ」。");
+
+            var chars = EnumerableHelper.RangeChars(char.MinValue, char.MaxValue)
+                .Where(c => !KanaConversion.Hiraganas.Contains(c));
+            foreach (var c in chars)
+                Test(c.ToString(), c.ToString());
+        }
+
+        [TestMethod]
+        public void HiraganaToKatakana_VB()
+        {
+            void Test(string value) => Assert.AreEqual(value.ToKatakana_VB(), value.HiraganaToKatakana());
+            var Test_VB = TestHelper.CreateAssertion<string, string>(VBStringsHelper.ToKatakana_VB);
+
+            Test("");
+            Test(KanaConversion.Hiraganas);
+
+            Test_VB(null, "");
+        }
+
+        [TestMethod]
+        public void KatakanaToHiragana()
+        {
+            var Test = TestHelper.CreateAssertion<string, string>(KanaConversion.KatakanaToHiragana);
+
+            Test(null, null);
+            Test("", "");
+            Test(KanaConversion.Katakanas, KanaConversion.Hiraganas);
+
+            Test("ベートーヴェン、「ピアノ・ソナタ」。", "べーとーゔぇん、「ぴあの・そなた」。");
+
+            var chars = EnumerableHelper.RangeChars(char.MinValue, char.MaxValue)
+                .Where(c => !KanaConversion.Katakanas.Contains(c));
+            foreach (var c in chars)
+                Test(c.ToString(), c.ToString());
+        }
+
+        [TestMethod]
+        public void KatakanaToHiragana_VB()
+        {
+            void Test(string value) => Assert.AreEqual(value.ToHiragana_VB(), value.KatakanaToHiragana());
+            var Test_VB = TestHelper.CreateAssertion<string, string>(VBStringsHelper.ToHiragana_VB);
+
+            Test("");
+            Test(KanaConversion.Katakanas.Replace("ヴ", ""));
+
+            Test_VB(null, "");
+            // カタカナの "ヴ" に変換されます。
+            Test_VB("ゔ", "ヴ");
+            // カタカナの "ヴ" は変換されません。
+            Test_VB("ヴ", "ヴ");
+        }
+
+        [TestMethod]
         public void HalfKatakanaToHiragana()
         {
             var Test = TestHelper.CreateAssertion<string, string>(KanaConversion.HalfKatakanaToHiragana);
@@ -74,19 +136,6 @@ namespace NetUnitTest
             Test(string.Concat(KanaConversion.SemiVoiceableHalfKatakanas.Select(c => $"{c}ﾟ")));
 
             Test_VB(null, "");
-        }
-
-        [TestMethod]
-        public void ToWideHiragana_Original()
-        {
-            var changed = Enumerable.Range(0, char.MaxValue + 1)
-                .Select(i => new { i, before = (char)i, after = ((char)i).ToString().ToWideHiragana_VB().Single() })
-                .Where(_ => _.before != _.after)
-                .Where(_ => _.after != '？' || _.before == '?')
-                .ToArray();
-
-            foreach (var _ in changed)
-                Console.WriteLine($"{_.i:D5}-{_.i:X4}: {_.before} > {_.after}");
         }
     }
 }
