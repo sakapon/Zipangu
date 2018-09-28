@@ -41,10 +41,10 @@ namespace NetUnitTest
         }
 
         [TestMethod]
-        public void Narrow() => WriteChanged_Narrow(VbStrConv.Narrow);
+        public void Wide() => WriteChanged_Wide(VbStrConv.Wide);
 
         [TestMethod]
-        public void Wide() => WriteChanged_Wide(VbStrConv.Wide);
+        public void Narrow() => WriteChanged_Narrow(VbStrConv.Narrow);
 
         [TestMethod]
         public void Katakana() => WriteChanged_Narrow(VbStrConv.Katakana);
@@ -53,15 +53,15 @@ namespace NetUnitTest
         public void Hiragana() => WriteChanged_Narrow(VbStrConv.Hiragana);
 
         [TestMethod]
-        public void NarrowKatakana() => WriteChanged_Narrow(VbStrConv.Narrow | VbStrConv.Katakana);
-
-        [TestMethod]
-        public void NarrowHiragana() => WriteChanged_Narrow(VbStrConv.Narrow | VbStrConv.Hiragana);
-
-        [TestMethod]
         public void WideKatakana() => WriteChanged_Wide(VbStrConv.Wide | VbStrConv.Katakana);
 
         [TestMethod]
         public void WideHiragana() => WriteChanged_Wide(VbStrConv.Wide | VbStrConv.Hiragana);
+
+        [TestMethod]
+        public void NarrowKatakana() => WriteChanged_Narrow(VbStrConv.Narrow | VbStrConv.Katakana);
+
+        [TestMethod]
+        public void NarrowHiragana() => WriteChanged_Narrow(VbStrConv.Narrow | VbStrConv.Hiragana);
     }
 }
