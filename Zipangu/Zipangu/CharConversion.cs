@@ -4,7 +4,7 @@ namespace Zipangu
 {
     public static class CharConversion
     {
-        public static string Convert(this string value, AsciiConv ascii, KanaConv kana)
+        public static string Convert(this string value, KanaConv kana = KanaConv.None, AsciiConv ascii = AsciiConv.None)
         {
             if (!Enum.IsDefined(typeof(AsciiConv), ascii)) throw new ArgumentException("The value is not defined.", nameof(ascii));
             if (!Enum.IsDefined(typeof(KanaConv), kana)) throw new ArgumentException("The value is not defined.", nameof(kana));
