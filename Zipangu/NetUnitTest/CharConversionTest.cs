@@ -22,6 +22,9 @@ namespace NetUnitTest
 
             Assert.AreEqual("abcXYZゔぃっぷヴィップｳﾞｨｯﾌﾟ", input.Convert(KanaConv.None, AsciiConv.ToNarrow));
             Assert.AreEqual("ａｂｃＸＹＺゔぃっぷヴィップｳﾞｨｯﾌﾟ", input.Convert(KanaConv.None, AsciiConv.ToWide));
+
+            Assert.AreEqual("ａｂｃＸＹＺゔぃっぷゔぃっぷゔぃっぷ", input.Convert(KanaConv.AllKanaToHiragana, AsciiConv.ToWide));
+            Assert.AreEqual("abcXYZゔぃっぷヴィップヴィップ", input.Convert(KanaConv.HalfKatakanaToKatakana, AsciiConv.ToNarrow));
         }
     }
 }
