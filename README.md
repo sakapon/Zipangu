@@ -21,6 +21,8 @@ Install-Package Zipangu
 ### 文字の変換
 - ASCII 文字 → 全角 ASCII 文字
 - 全角 ASCII 文字 → ASCII 文字
+- ひらがな → カタカナ
+- カタカナ → ひらがな
 - 半角カタカナ → ひらがな
 - 半角カタカナ → カタカナ
 
@@ -37,8 +39,14 @@ using Zipangu;
     static void Main(string[] args)
     {
         // べーとーゔぇん、「ぴあの・そなた」。
-        var converted = "ﾍﾞｰﾄｰｳﾞｪﾝ､｢ﾋﾟｱﾉ･ｿﾅﾀ｣｡".HalfKatakanaToHiragana();
+        var result = "ﾍﾞｰﾄｰｳﾞｪﾝ､｢ﾋﾟｱﾉ･ｿﾅﾀ｣｡".HalfKatakanaToHiragana();
     }
+```
+
+変換の種類を組み合わせるには、`Convert` メソッドを呼び出します。
+```c#
+        // モーニング娘。＇１８
+        var result = "ﾓｰﾆﾝｸﾞ娘｡'18".Convert(KanaConv.HalfKatakanaToKatakana, AsciiConv.ToWide);
 ```
 
 ## Target Frameworks
@@ -46,4 +54,5 @@ using Zipangu;
 - .NET Framework 4.0
 
 ## Release Notes
+- **v1.0.3** 初版リリース。
 - **v1.0.1** β版リリース。
