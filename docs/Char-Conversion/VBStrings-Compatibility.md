@@ -1,7 +1,6 @@
 ## VisualBasic.Strings との互換性
-
-このライブラリは、.NET Framework の Microsoft.VisualBasic.dll の [Strings.StrConv メソッド](https://docs.microsoft.com/dotnet/api/microsoft.visualbasic.strings.strconv)との互換性は完全ではありません。
-とはいえ、ほぼ同じであり、それらの差異を以下に示します。
+このライブラリでは、.NET Framework の Microsoft.VisualBasic.dll の [Strings.StrConv メソッド](https://docs.microsoft.com/dotnet/api/microsoft.visualbasic.strings.strconv)との互換性は完全ではありません。
+それらの差異を以下に示します。
 
 ### AsciiToWide
 | 入力 | Zipangu | VisualBasic.Strings |
@@ -33,4 +32,4 @@
 差異なし
 
 ### References
-- [VisualBasic.Strings Test](../VBStringsTest)
+- [VisualBasic.Strings のテスト データ](../VBStringsTest)
