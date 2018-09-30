@@ -58,3 +58,7 @@ var result = "ももいろクローバーZ".KatakanaToHiragana();
 // ももいろクローバーZ
 var result = "ももいろｸﾛｰﾊﾞｰZ".HalfKatakanaToKatakana();
 ```
+
+### References
+- [文字の種類](Unicode.md)
+- [VisualBasic.Strings との互換性](VBStrings-Compatibility.md)
