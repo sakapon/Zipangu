@@ -19,7 +19,7 @@ Install-Package Zipangu
 
 ## Features
 ### 文字の変換
-詳細: [Char Conversion](docs/Char-Conversion)
+[仕様の詳細はこちら](docs/Char-Conversion)
 - ASCII 文字 → 全角 ASCII 文字
 - 全角 ASCII 文字 → ASCII 文字
 - ひらがな → カタカナ
@@ -29,7 +29,7 @@ Install-Package Zipangu
 
 ## Usage
 ### 文字の変換
-まず、Zipangu 名前空間の using ディレクティブを追加します。
+まず、`Zipangu` 名前空間の using ディレクティブを追加します。
 ```c#
 using System;
 using Zipangu;
