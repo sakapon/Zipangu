@@ -19,6 +19,7 @@ Install-Package Zipangu
 
 ## Features
 ### 文字の変換
+詳細: [Char Conversion](docs/Char-Conversion)
 - ASCII 文字 → 全角 ASCII 文字
 - 全角 ASCII 文字 → ASCII 文字
 - ひらがな → カタカナ
@@ -36,17 +37,14 @@ using Zipangu;
 
 各メソッドは拡張メソッドとして提供されています。
 ```c#
-    static void Main(string[] args)
-    {
-        // べーとーゔぇん、「ぴあの・そなた」。
-        var result = "ﾍﾞｰﾄｰｳﾞｪﾝ､｢ﾋﾟｱﾉ･ｿﾅﾀ｣｡".HalfKatakanaToHiragana();
-    }
+// べーとーゔぇん、「ぴあの・そなた」。
+var result = "ﾍﾞｰﾄｰｳﾞｪﾝ､｢ﾋﾟｱﾉ･ｿﾅﾀ｣｡".HalfKatakanaToHiragana();
 ```
 
 変換の種類を組み合わせるには、`Convert` メソッドを呼び出します。
 ```c#
-        // モーニング娘。＇１８
-        var result = "ﾓｰﾆﾝｸﾞ娘｡'18".Convert(KanaConv.HalfKatakanaToKatakana, AsciiConv.ToWide);
+// モーニング娘。＇１８
+var result = "ﾓｰﾆﾝｸﾞ娘｡'18".Convert(KanaConv.HalfKatakanaToKatakana, AsciiConv.ToWide);
 ```
 
 ## Target Frameworks
