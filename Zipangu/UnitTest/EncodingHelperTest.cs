@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Zipangu;
 
-namespace NetUnitTest
+namespace UnitTest
 {
     [TestClass]
     public class EncodingHelperTest
