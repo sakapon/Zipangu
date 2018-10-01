@@ -18,8 +18,8 @@ namespace NetUnitTest
         [TestMethod]
         public void ShiftJIS_GetString()
         {
-            var text = "Aあ漢";
-            var bytes = new byte[] { 65, 130, 160, 138, 191 };
+            var text = "ｼｬ乱Q";
+            var bytes = new byte[] { 188, 172, 151, 144, 81 };
 
             Assert.AreEqual(text, EncodingHelper.ShiftJIS.GetString(bytes));
             CollectionAssert.AreEqual(bytes, EncodingHelper.ShiftJIS.GetBytes(text));
