@@ -43,8 +43,8 @@ var result = "ﾍﾞｰﾄｰｳﾞｪﾝ､｢ﾋﾟｱﾉ･ｿﾅﾀ｣｡".H
 
 変換の種類を組み合わせるには、`Convert` メソッドを呼び出します。
 ```c#
-// モーニング娘。＇１８
-var result = "ﾓｰﾆﾝｸﾞ娘｡'18".Convert(KanaConv.HalfKatakanaToKatakana, AsciiConv.ToWide);
+// モモイロクローバーＺ
+var result = "ももいろｸﾛｰﾊﾞｰZ".Convert(KanaConv.AllKanaToKatakana, AsciiConv.ToWide);
 ```
 
 ## Target Frameworks
