@@ -4,7 +4,7 @@ namespace Zipangu
 {
     /// <summary>
     /// 文字を変換するためのメソッドを提供します。
-    /// <c>Microsoft.VisualBasic.Strings.StrConv</c> メソッドとの互換性はありません。
+    /// <see cref="Microsoft.VisualBasic.Strings.StrConv"/> メソッドとの互換性は完全ではありません。
     /// </summary>
     public static class CharConversion
     {
