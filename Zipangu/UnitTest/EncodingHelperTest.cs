@@ -14,5 +14,15 @@ namespace UnitTest
             Assert.AreEqual(932, actual.CodePage);
             Assert.AreEqual("shift_jis", actual.WebName);
         }
+
+        [TestMethod]
+        public void ShiftJIS_GetString()
+        {
+            var text = "Aあ漢";
+            var bytes = new byte[] { 65, 130, 160, 138, 191 };
+
+            Assert.AreEqual(text, EncodingHelper.ShiftJIS.GetString(bytes));
+            CollectionAssert.AreEqual(bytes, EncodingHelper.ShiftJIS.GetBytes(text));
+        }
     }
 }
