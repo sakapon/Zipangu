@@ -22,4 +22,10 @@
     <DocumentationFile>bin\Release\Zipangu.xml</DocumentationFile>
   </PropertyGroup>
 
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+    <PackageReference Include="System.Text.Encoding.CodePages">
+      <Version>4.5.0</Version>
+    </PackageReference>
+  </ItemGroup>
+
 </Project>
