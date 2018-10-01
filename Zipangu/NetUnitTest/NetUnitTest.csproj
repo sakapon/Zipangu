@@ -55,6 +55,7 @@
     <Compile Include="AsciiConversionTest.cs" />
     <Compile Include="TestHelper.cs" />
     <Compile Include="CharConversionTest.cs" />
+    <Compile Include="EncodingHelperTest.cs" />
     <Compile Include="VBStringsTest.cs" />
     <Compile Include="VBStringsHelper.cs" />
   </ItemGroup>
