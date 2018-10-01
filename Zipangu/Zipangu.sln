@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2016
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zipangu", "Zipangu\Zipangu.csproj", "{EB4C703B-3056-4303-AEAD-137EA8C1DF85}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zipangu", "Zipangu\Zipangu.csproj", "{EB4C703B-3056-4303-AEAD-137EA8C1DF85}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetUnitTest", "NetUnitTest\NetUnitTest.csproj", "{46A0E652-37BA-4B8C-9831-79C4AC5838AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest", "UnitTest\UnitTest.csproj", "{E770B68E-EC29-44CA-A32A-3B011E05C153}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{46A0E652-37BA-4B8C-9831-79C4AC5838AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{46A0E652-37BA-4B8C-9831-79C4AC5838AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{46A0E652-37BA-4B8C-9831-79C4AC5838AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E770B68E-EC29-44CA-A32A-3B011E05C153}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E770B68E-EC29-44CA-A32A-3B011E05C153}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E770B68E-EC29-44CA-A32A-3B011E05C153}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E770B68E-EC29-44CA-A32A-3B011E05C153}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
