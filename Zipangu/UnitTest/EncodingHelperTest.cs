@@ -16,6 +16,22 @@ namespace UnitTest
         }
 
         [TestMethod]
+        public void ISO2022JP()
+        {
+            var actual = EncodingHelper.ISO2022JP;
+            Assert.AreEqual(50220, actual.CodePage);
+            Assert.AreEqual("iso-2022-jp", actual.WebName);
+        }
+
+        [TestMethod]
+        public void EUCJP()
+        {
+            var actual = EncodingHelper.EUCJP;
+            Assert.AreEqual(51932, actual.CodePage);
+            Assert.AreEqual("euc-jp", actual.WebName);
+        }
+
+        [TestMethod]
         public void ShiftJIS_GetString()
         {
             var text = "ｼｬ乱Q";
