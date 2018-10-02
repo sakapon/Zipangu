@@ -4,7 +4,7 @@
 [![NuGet](https://img.shields.io/nuget/dt/Zipangu.svg)](https://www.nuget.org/packages/Zipangu/)
 
 A library for compatibility about Japan.  
-日本における互換性のためのライブラリです。
+日本で利用される機能を集めたライブラリです。
 
 ## Setup
 Zipangu は NuGet Gallery に登録されています。  
@@ -51,6 +51,10 @@ var result = "ﾓｰﾆﾝｸﾞ娘｡'18".Convert(KanaConv.HalfKatakanaToKataka
 - .NET Standard 2.0
 - .NET Framework 4.0
 
+### Dependencies
+- [System.Text.Encoding.CodePages](https://www.nuget.org/packages/System.Text.Encoding.CodePages/)
+
 ## Release Notes
+- **v1.1.6** 文字エンコーディングのプロパティを追加。
 - **v1.0.3** 初版リリース。
 - **v1.0.1** β版リリース。
