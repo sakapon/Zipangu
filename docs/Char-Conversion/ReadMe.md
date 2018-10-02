@@ -34,6 +34,8 @@ var result = "B'z".AsciiToWide();
 - ひらがな: `ぁ` ～ `ん` および `ゔゝゞ`
 - カタカナ: `ァ` ～ `ン` および `ヴヽヾ`
 
+`゛゜・ー` は共通です。
+
 例
 ```c#
 // ももいろくろーばーZ
@@ -60,5 +62,5 @@ var result = "ももいろｸﾛｰﾊﾞｰZ".HalfKatakanaToKatakana();
 ```
 
 ### References
-- [文字の種類](Unicode.md)
+- [文字の種類 (Unicode)](Unicode.md)
 - [VisualBasic.Strings との互換性](VBStrings-Compatibility.md)
