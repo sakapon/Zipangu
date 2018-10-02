@@ -11,6 +11,13 @@ namespace NetUnitTest
     [TestClass]
     public class VBStringsTest
     {
+        static readonly string TargetChars = EnumerableHelper.RangeChars(' ', '~')
+            + EnumerableHelper.RangeChars('　', '〕').Replace("〄", "")
+            + EnumerableHelper.RangeChars('ぁ', 'ゖ')
+            + EnumerableHelper.RangeChars('゛', 'ヿ')
+            + EnumerableHelper.RangeChars('！', '～')
+            + EnumerableHelper.RangeChars('｡', 'ﾟ');
+
         static string ToMessage1(char c) => $"({(int)c:D5}-{(int)c:X4}) {c}";
         static string ToMessage2(char c) => $"{c} ({(int)c:D5}-{(int)c:X4})";
 
@@ -20,7 +27,7 @@ namespace NetUnitTest
             var changed = EnumerableHelper.RangeChars(char.MinValue, char.MaxValue)
                 .Select(c => new { before = c, after = Strings.StrConv(c.ToString(), mode).Single() })
                 .Where(_ => _.before != _.after)
-                .Where(_ => _.after != '？' || _.before == '?')
+                .Where(_ => TargetChars.Contains(_.before) || _.after != '？')
                 .Select(_ => $"{ToMessage1(_.before)} > {ToMessage2(_.after)}")
                 .ToArray();
 
@@ -33,7 +40,7 @@ namespace NetUnitTest
             var changed = EnumerableHelper.RangeChars(char.MinValue, char.MaxValue)
                 .Select(c => new { before = c, after = Strings.StrConv(c.ToString(), mode) })
                 .Where(_ => _.before.ToString() != _.after)
-                .Where(_ => _.after != "?" || _.before == '？')
+                .Where(_ => TargetChars.Contains(_.before) || _.after != "?")
                 .Select(_ => $"{ToMessage1(_.before)} > {(_.after.Length == 1 ? ToMessage2(_.after[0]) : _.after)}")
                 .ToArray();
 
