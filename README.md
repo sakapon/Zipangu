@@ -27,14 +27,20 @@ Install-Package Zipangu
 - 半角カタカナ → ひらがな
 - 半角カタカナ → カタカナ
 
+### 文字エンコーディング
+各エンコーディングのインスタンスにアクセスするためのプロパティを提供します。
+- Shift_JIS (932)
+- ISO-2022-JP (50220)
+- EUC-JP (51932)
+
 ## Usage
-### 文字の変換
 まず、`Zipangu` 名前空間の using ディレクティブを追加します。
 ```c#
 using System;
 using Zipangu;
 ```
 
+### 文字の変換
 各メソッドは拡張メソッドとして提供されています。
 ```c#
 // べーとーゔぇん、「ぴあの・そなた」。
@@ -47,12 +53,19 @@ var result = "ﾍﾞｰﾄｰｳﾞｪﾝ､｢ﾋﾟｱﾉ･ｿﾅﾀ｣｡".H
 var result = "ﾓｰﾆﾝｸﾞ娘｡'18".Convert(KanaConv.HalfKatakanaToKatakana, AsciiConv.ToWide);
 ```
 
+### 文字エンコーディング
+`EncodingHelper` クラスの静的プロパティで各エンコーディングのインスタンスを取得できます。
+```c#
+// { 188, 172, 151, 144, 81 }
+var result = EncodingHelper.ShiftJIS.GetBytes("ｼｬ乱Q");
+```
+
 ## Target Frameworks
 - .NET Standard 2.0
 - .NET Framework 4.0
 
 ### Dependencies
-- [System.Text.Encoding.CodePages](https://www.nuget.org/packages/System.Text.Encoding.CodePages/)
+- [System.Text.Encoding.CodePages](https://www.nuget.org/packages/System.Text.Encoding.CodePages/) (.NET Standard 2.0)
 
 ## Release Notes
 - **v1.1.6** 文字エンコーディングのプロパティを追加。
