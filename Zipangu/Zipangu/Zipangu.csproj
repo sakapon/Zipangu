@@ -7,13 +7,13 @@
     <AssemblyTitle>Zipangu</AssemblyTitle>
     <Product>KLibrary</Product>
     <Description>A library for compatibility about Japan.
-日本における互換性のためのライブラリです。</Description>
+日本で利用される機能を集めたライブラリです。</Description>
     <Authors>Keiho Sakapon</Authors>
     <Copyright>© 2018 Keiho Sakapon</Copyright>
     <PackageProjectUrl>https://github.com/sakapon/Zipangu</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/sakapon/Zipangu/blob/master/LICENSE</PackageLicenseUrl>
-    <PackageTags>Japan Kana Conversion</PackageTags>
-    <PackageReleaseNotes>The first release.</PackageReleaseNotes>
+    <PackageTags>Japan Kana Conversion Encoding</PackageTags>
+    <PackageReleaseNotes>文字エンコーディングのプロパティを追加。</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
