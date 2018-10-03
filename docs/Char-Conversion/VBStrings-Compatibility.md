@@ -28,14 +28,18 @@
 ### HalfKatakanaToHiragana
 | 入力 | Zipangu | VisualBasic.Strings |
 -|-|-
-| `ｳﾞ` | `ゔ` | `ヴ` |
 | `ヵヶ` | 無変換 | `?` |
 | `ゕゖゟ゠ヷヸヹヺヿ` | 無変換 | `？` |
+| `ｳﾞ` | `ゔ` | `ヴ` |
+| `ワﾞヰﾞヱﾞヲﾞ` | `ワ゛` など | `?` |
+| `ｦﾞﾜﾞ` | `を゛` など | `?` |
 
 ### HalfKatakanaToKatakana
 | 入力 | Zipangu | VisualBasic.Strings |
 -|-|-
 | `ゕゖゟ゠ヷヸヹヺヿ` | 無変換 | `？` |
+| `ワﾞヰﾞヱﾞヲﾞ` | `ワ゛` など | `?` |
+| `ｦﾞﾜﾞ` | `ヲ゛` など | `?` |
 
 ### References
 - [VisualBasic.Strings のテスト データ](../VBStringsTest)
