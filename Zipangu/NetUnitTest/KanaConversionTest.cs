@@ -114,6 +114,10 @@ namespace NetUnitTest
             Test_VB(null, "");
             // カタカナの "ヴ" に変換されます。
             Test_VB("ｳﾞ", "ヴ");
+            // "?" に変換されます。
+            Test_VB("ワﾞヰﾞヱﾞヲﾞ", new string('?', 4));
+            // "?" に変換されます。
+            Test_VB("ｦﾞﾜﾞ", new string('?', 2));
         }
 
         [TestMethod]
@@ -147,6 +151,10 @@ namespace NetUnitTest
             Test(string.Concat(KanaConversion.SemiVoiceableHalfKatakanas.Select(c => $"{c}ﾟ")));
 
             Test_VB(null, "");
+            // "?" に変換されます。
+            Test_VB("ワﾞヰﾞヱﾞヲﾞ", new string('?', 4));
+            // "?" に変換されます。
+            Test_VB("ｦﾞﾜﾞ", new string('?', 2));
         }
     }
 }
