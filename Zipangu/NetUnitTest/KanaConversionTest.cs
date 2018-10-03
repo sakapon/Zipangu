@@ -8,6 +8,11 @@ namespace NetUnitTest
     [TestClass]
     public class KanaConversionTest
     {
+        static readonly string AllKanas = EnumerableHelper.RangeChars('　', '〕').Replace("〄", "")
+            + EnumerableHelper.RangeChars('ぁ', 'ゖ')
+            + EnumerableHelper.RangeChars('゛', 'ヿ')
+            + EnumerableHelper.RangeChars('｡', 'ﾟ');
+
         [TestMethod]
         public void HiraganaToKatakana()
         {
@@ -32,9 +37,11 @@ namespace NetUnitTest
             var Test_VB = TestHelper.CreateAssertion<string, string>(VBStringsHelper.ToKatakana_VB);
 
             Test("");
-            Test(KanaConversion.Hiraganas);
+            Test(AllKanas.Replace("ゕゖ", "").Replace("ゟ゠", "").Replace("ヷヸヹヺ", "").Replace("ヿ", ""));
 
             Test_VB(null, "");
+            // "?" に変換されます。
+            Test_VB("ゕゖゟ゠ヷヸヹヺヿ", new string('?', 9));
         }
 
         [TestMethod]
@@ -61,13 +68,17 @@ namespace NetUnitTest
             var Test_VB = TestHelper.CreateAssertion<string, string>(VBStringsHelper.ToHiragana_VB);
 
             Test("");
-            Test(KanaConversion.Katakanas.Replace("ヴ", ""));
+            Test(AllKanas.Replace("ゔゕゖ", "").Replace("ゟ゠", "").Replace("ヴヵヶヷヸヹヺ", "").Replace("ヿ", ""));
 
             Test_VB(null, "");
             // カタカナの "ヴ" に変換されます。
             Test_VB("ゔ", "ヴ");
             // カタカナの "ヴ" は変換されません。
             Test_VB("ヴ", "ヴ");
+            // "?" に変換されます。
+            Test_VB("ヵヶ", new string('?', 2));
+            // "?" に変換されます。
+            Test_VB("ゕゖゟ゠ヷヸヹヺヿ", new string('?', 9));
         }
 
         [TestMethod]
@@ -103,6 +114,10 @@ namespace NetUnitTest
             Test_VB(null, "");
             // カタカナの "ヴ" に変換されます。
             Test_VB("ｳﾞ", "ヴ");
+            // "?" に変換されます。
+            Test_VB("ワﾞヰﾞヱﾞヲﾞ", new string('?', 4));
+            // "?" に変換されます。
+            Test_VB("ｦﾞﾜﾞ", new string('?', 2));
         }
 
         [TestMethod]
@@ -136,6 +151,10 @@ namespace NetUnitTest
             Test(string.Concat(KanaConversion.SemiVoiceableHalfKatakanas.Select(c => $"{c}ﾟ")));
 
             Test_VB(null, "");
+            // "?" に変換されます。
+            Test_VB("ワﾞヰﾞヱﾞヲﾞ", new string('?', 4));
+            // "?" に変換されます。
+            Test_VB("ｦﾞﾜﾞ", new string('?', 2));
         }
     }
 }
