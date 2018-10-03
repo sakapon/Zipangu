@@ -29,9 +29,13 @@
 | 入力 | Zipangu | VisualBasic.Strings |
 -|-|-
 | `ｳﾞ` | `ゔ` | `ヴ` |
+| `ヵヶ` | 無変換 | `?` |
+| `ゕゖゟ゠ヷヸヹヺヿ` | 無変換 | `？` |
 
 ### HalfKatakanaToKatakana
-差異なし
+| 入力 | Zipangu | VisualBasic.Strings |
+-|-|-
+| `ゕゖゟ゠ヷヸヹヺヿ` | 無変換 | `？` |
 
 ### References
 - [VisualBasic.Strings のテスト データ](../VBStringsTest)
