@@ -13,15 +13,17 @@
 | FF3C `＼` | `\` | `＼` |
 
 ### HiraganaToKatakana
-差異なし
+| 入力 | Zipangu | VisualBasic.Strings |
+-|-|-
+| `ゕゖゟ゠ヷヸヹヺヿ` | 無変換 | `?` |
 
 ### KatakanaToHiragana
 | 入力 | Zipangu | VisualBasic.Strings |
 -|-|-
 | 3094 `ゔ` | `ゔ` | `ヴ` |
 | 30F4 `ヴ` | `ゔ` | `ヴ` |
-| 30F5 `ヵ` | `ヵ` | `?` |
-| 30F6 `ヶ` | `ヶ` | `?` |
+| `ヵヶ` | 無変換 | `?` |
+| `ゕゖゟ゠ヷヸヹヺヿ` | 無変換 | `?` |
 
 ### HalfKatakanaToHiragana
 | 入力 | Zipangu | VisualBasic.Strings |
