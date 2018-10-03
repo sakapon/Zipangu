@@ -76,7 +76,9 @@ namespace NetUnitTest
             // カタカナの "ヴ" は変換されません。
             Test_VB("ヴ", "ヴ");
             // "?" に変換されます。
-            Test_VB("ゕゖゟ゠ヵヶヷヸヹヺヿ", new string('?', 11));
+            Test_VB("ヵヶ", new string('?', 2));
+            // "?" に変換されます。
+            Test_VB("ゕゖゟ゠ヷヸヹヺヿ", new string('?', 9));
         }
 
         [TestMethod]
