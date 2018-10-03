@@ -47,6 +47,28 @@ namespace NetUnitTest
             File.WriteAllLines($"VBStrings-{mode.ToString().Replace(", ", "")}.txt", changed, Encoding.UTF8);
         }
 
+        static void WriteChanged_Voiced(VbStrConv mode)
+        {
+            var changed = EnumerableHelper.RangeChars(char.MinValue, char.MaxValue)
+                .Select(c => new { before = c, after = Strings.StrConv($"{c}ﾞ", mode) })
+                .Where(_ => _.after.Length == 1)
+                .Select(_ => $"{ToMessage1(_.before)} > {ToMessage2(_.after[0])}")
+                .ToArray();
+
+            File.WriteAllLines($"VBStrings-{mode.ToString().Replace(", ", "")}-Voiced.txt", changed, Encoding.UTF8);
+        }
+
+        static void WriteChanged_SemiVoiced(VbStrConv mode)
+        {
+            var changed = EnumerableHelper.RangeChars(char.MinValue, char.MaxValue)
+                .Select(c => new { before = c, after = Strings.StrConv($"{c}ﾟ", mode) })
+                .Where(_ => _.after.Length == 1)
+                .Select(_ => $"{ToMessage1(_.before)} > {ToMessage2(_.after[0])}")
+                .ToArray();
+
+            File.WriteAllLines($"VBStrings-{mode.ToString().Replace(", ", "")}-SemiVoiced.txt", changed, Encoding.UTF8);
+        }
+
         [TestMethod]
         public void Wide() => WriteChanged_Wide(VbStrConv.Wide);
 
@@ -70,5 +92,17 @@ namespace NetUnitTest
 
         [TestMethod]
         public void NarrowHiragana() => WriteChanged_Narrow(VbStrConv.Narrow | VbStrConv.Hiragana);
+
+        [TestMethod]
+        public void WideKatakana_Voiced() => WriteChanged_Voiced(VbStrConv.Wide | VbStrConv.Katakana);
+
+        [TestMethod]
+        public void WideHiragana_Voiced() => WriteChanged_Voiced(VbStrConv.Wide | VbStrConv.Hiragana);
+
+        [TestMethod]
+        public void WideKatakana_SemiVoiced() => WriteChanged_SemiVoiced(VbStrConv.Wide | VbStrConv.Katakana);
+
+        [TestMethod]
+        public void WideHiragana_SemiVoiced() => WriteChanged_SemiVoiced(VbStrConv.Wide | VbStrConv.Hiragana);
     }
 }
