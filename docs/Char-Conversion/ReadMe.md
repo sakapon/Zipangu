@@ -34,13 +34,12 @@ var result = "B'z".AsciiToWide();
 - ひらがな: `ぁ` ～ `ん` および `ゔゝゞ`
 - カタカナ: `ァ` ～ `ン` および `ヴヽヾ`
 
-`゛゜・ー` は共通です。  
-また、`ゕゖ` および `ヵヶ` は変換されません。
+`゛゜・ー` は共通です。
 
 例
 ```c#
-// ひばりヶ丘
-var result = "ヒバリヶ丘".KatakanaToHiragana();
+// ももいろくろーばーZ
+var result = "ももいろクローバーZ".KatakanaToHiragana();
 ```
 
 ### 半角カタカナ
