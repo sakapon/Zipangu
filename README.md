@@ -19,7 +19,8 @@ Install-Package Zipangu
 
 ## Features
 ### 文字の変換
-[仕様の詳細はこちら](docs/Char-Conversion)
+.NET Framework の Microsoft.VisualBasic.dll の [Strings.StrConv メソッド](https://docs.microsoft.com/dotnet/api/microsoft.visualbasic.strings.strconv)との互換性は完全ではありません。  
+[仕様の詳細はこちら](docs/Char-Conversion)。
 - ASCII 文字 → 全角 ASCII 文字
 - 全角 ASCII 文字 → ASCII 文字
 - ひらがな → カタカナ
@@ -62,6 +63,7 @@ var result = EncodingHelper.ShiftJIS.GetBytes("ｼｬ乱Q");
 
 ## Target Frameworks
 - .NET Standard 2.0
+  - [.NET Core 2.0, UWP 10.0.16299 など](https://docs.microsoft.com/ja-jp/dotnet/standard/net-standard)
 - .NET Framework 4.0
 
 ### Dependencies
