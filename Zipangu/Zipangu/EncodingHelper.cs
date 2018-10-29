@@ -26,11 +26,11 @@ namespace Zipangu
         public static Encoding EUCJP => _EUCJP.Value;
         static readonly Lazy<Encoding> _EUCJP = new Lazy<Encoding>(() => Encoding.GetEncoding("euc-jp"));
 
+#if NETSTANDARD
         static EncodingHelper()
         {
-#if NETSTANDARD
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-#endif
         }
+#endif
     }
 }
