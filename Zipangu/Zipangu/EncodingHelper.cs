@@ -11,26 +11,26 @@ namespace Zipangu
         /// <summary>
         /// Shift_JIS 形式のエンコーディングを取得します。
         /// </summary>
-        public static Encoding ShiftJIS { get; }
+        public static Encoding ShiftJIS => _ShiftJIS.Value;
+        static readonly Lazy<Encoding> _ShiftJIS = new Lazy<Encoding>(() => Encoding.GetEncoding("shift_jis"));
 
         /// <summary>
         /// ISO-2022-JP 形式のエンコーディングを取得します。
         /// </summary>
-        public static Encoding ISO2022JP { get; }
+        public static Encoding ISO2022JP => _ISO2022JP.Value;
+        static readonly Lazy<Encoding> _ISO2022JP = new Lazy<Encoding>(() => Encoding.GetEncoding("iso-2022-jp"));
 
         /// <summary>
         /// EUC-JP 形式のエンコーディングを取得します。
         /// </summary>
-        public static Encoding EUCJP { get; }
+        public static Encoding EUCJP => _EUCJP.Value;
+        static readonly Lazy<Encoding> _EUCJP = new Lazy<Encoding>(() => Encoding.GetEncoding("euc-jp"));
 
         static EncodingHelper()
         {
 #if NETSTANDARD
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 #endif
-            ShiftJIS = Encoding.GetEncoding("shift_jis");
-            ISO2022JP = Encoding.GetEncoding("iso-2022-jp");
-            EUCJP = Encoding.GetEncoding("euc-jp");
         }
     }
 }
