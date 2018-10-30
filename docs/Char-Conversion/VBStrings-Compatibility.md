@@ -15,14 +15,15 @@
 ### HiraganaToKatakana
 | 入力 | Zipangu | VisualBasic.Strings |
 -|-|-
-| `ゕゖゟ゠ヷヸヹヺヿ` | 無変換 | `?` |
+| `ゕゖ` | `ヵヶ` | `?` |
+| `ゟ゠ヷヸヹヺヿ` | 無変換 | `?` |
 
 ### KatakanaToHiragana
 | 入力 | Zipangu | VisualBasic.Strings |
 -|-|-
 | 3094 `ゔ` | `ゔ` | `ヴ` |
 | 30F4 `ヴ` | `ゔ` | `ヴ` |
-| `ヵヶ` | 無変換 | `?` |
+| `ヵヶ` | `ゕゖ` | `?` |
 | `ゕゖゟ゠ヷヸヹヺヿ` | 無変換 | `?` |
 
 ### HalfKatakanaToHiragana
