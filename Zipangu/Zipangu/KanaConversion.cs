@@ -12,9 +12,9 @@ namespace Zipangu
     public static class KanaConversion
     {
         /// <summary>ひらがな。</summary>
-        internal static readonly string Hiraganas = EnumerableHelper.RangeChars('ぁ', 'ゔ') + "ゝゞ";
+        internal static readonly string Hiraganas = EnumerableHelper.RangeChars('ぁ', 'ゖ') + "ゝゞ";
         /// <summary>カタカナ。</summary>
-        internal static readonly string Katakanas = EnumerableHelper.RangeChars('ァ', 'ヴ') + "ヽヾ";
+        internal static readonly string Katakanas = EnumerableHelper.RangeChars('ァ', 'ヶ') + "ヽヾ";
         /// <summary>半角カタカナ。</summary>
         internal static readonly string HalfKatakanas = EnumerableHelper.RangeChars('｡', 'ﾟ');
 
@@ -58,14 +58,14 @@ namespace Zipangu
         /// </summary>
         /// <param name="value">変換対象の文字列。</param>
         /// <returns>変換後の文字列。</returns>
-        public static string HiraganaToKatakana(this string value) => value == null ? null : value.ReplaceByMap(HiraganaToKatakanaMap);
+        public static string HiraganaToKatakana(this string value) => value?.ReplaceByMap(HiraganaToKatakanaMap);
 
         /// <summary>
         /// 全角カタカナをひらがなに変換します。
         /// </summary>
         /// <param name="value">変換対象の文字列。</param>
         /// <returns>変換後の文字列。</returns>
-        public static string KatakanaToHiragana(this string value) => value == null ? null : value.ReplaceByMap(KatakanaToHiraganaMap);
+        public static string KatakanaToHiragana(this string value) => value?.ReplaceByMap(KatakanaToHiraganaMap);
 
         /// <summary>
         /// 半角カタカナをひらがなに変換します。
