@@ -89,7 +89,7 @@ namespace NetUnitTest
             Test(null, null);
             Test("", "");
             Test(KanaConversion.HalfKatakanas, KanaConversion.HiraganasByHalfKatakana);
-            Test(string.Concat(KanaConversion.VoiceableHalfKatakanas.Select(c => $"{c}ﾞ")), KanaConversion.VoicedHiraganas);
+            Test(string.Concat(KanaConversion.VoiceableHalfKatakanasForHiragana.Select(c => $"{c}ﾞ")), KanaConversion.VoicedHiraganas);
             Test(string.Concat(KanaConversion.SemiVoiceableHalfKatakanas.Select(c => $"{c}ﾟ")), KanaConversion.SemiVoicedHiraganas);
 
             Test("ﾍﾞｰﾄｰｳﾞｪﾝ､｢ﾋﾟｱﾉ･ｿﾅﾀ｣｡", "べーとーゔぇん、「ぴあの・そなた」。");
@@ -108,7 +108,7 @@ namespace NetUnitTest
 
             Test("");
             Test(KanaConversion.HalfKatakanas);
-            Test(string.Concat(KanaConversion.VoiceableHalfKatakanas.Replace("ｳ", "").Select(c => $"{c}ﾞ")));
+            Test(string.Concat(KanaConversion.VoiceableHalfKatakanasForHiragana.Replace("ｳ", "").Select(c => $"{c}ﾞ")));
             Test(string.Concat(KanaConversion.SemiVoiceableHalfKatakanas.Select(c => $"{c}ﾟ")));
 
             Test_VB(null, "");
@@ -128,7 +128,7 @@ namespace NetUnitTest
             Test(null, null);
             Test("", "");
             Test(KanaConversion.HalfKatakanas, KanaConversion.KatakanasByHalfKatakana);
-            Test(string.Concat(KanaConversion.VoiceableHalfKatakanas.Select(c => $"{c}ﾞ")), KanaConversion.VoicedKatakanas);
+            Test(string.Concat(KanaConversion.VoiceableHalfKatakanasForKatakana.Select(c => $"{c}ﾞ")), KanaConversion.VoicedKatakanas);
             Test(string.Concat(KanaConversion.SemiVoiceableHalfKatakanas.Select(c => $"{c}ﾟ")), KanaConversion.SemiVoicedKatakanas);
 
             Test("ﾍﾞｰﾄｰｳﾞｪﾝ､｢ﾋﾟｱﾉ･ｿﾅﾀ｣｡", "ベートーヴェン、「ピアノ・ソナタ」。");
@@ -147,7 +147,7 @@ namespace NetUnitTest
 
             Test("");
             Test(KanaConversion.HalfKatakanas);
-            Test(string.Concat(KanaConversion.VoiceableHalfKatakanas.Select(c => $"{c}ﾞ")));
+            Test(string.Concat(KanaConversion.VoiceableHalfKatakanasForKatakana.Replace("ｦ", "").Replace("ﾜ", "").Select(c => $"{c}ﾞ")));
             Test(string.Concat(KanaConversion.SemiVoiceableHalfKatakanas.Select(c => $"{c}ﾟ")));
 
             Test_VB(null, "");

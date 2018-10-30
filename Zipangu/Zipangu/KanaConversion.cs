@@ -23,12 +23,14 @@ namespace Zipangu
         /// <summary>半角カタカナに対応するカタカナ。</summary>
         internal const string KatakanasByHalfKatakana = "。「」、・ヲァィゥェォャュョッーアイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワン゛゜";
 
-        /// <summary>濁音となる半角カタカナ。</summary>
-        internal const string VoiceableHalfKatakanas = "ｳｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾊﾋﾌﾍﾎ";
+        /// <summary>濁音となる半角カタカナ (ひらがな向け)。</summary>
+        internal const string VoiceableHalfKatakanasForHiragana = "ｳｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾊﾋﾌﾍﾎ";
+        /// <summary>濁音となる半角カタカナ (カタカナ向け)。</summary>
+        internal const string VoiceableHalfKatakanasForKatakana = "ｦｳｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾊﾋﾌﾍﾎﾜ";
         /// <summary>濁音のひらがな。</summary>
         internal const string VoicedHiraganas = "ゔがぎぐげござじずぜぞだぢづでどばびぶべぼ";
         /// <summary>濁音のカタカナ。</summary>
-        internal const string VoicedKatakanas = "ヴガギグゲゴザジズゼゾダヂヅデドバビブベボ";
+        internal const string VoicedKatakanas = "ヺヴガギグゲゴザジズゼゾダヂヅデドバビブベボヷ";
 
         /// <summary>半濁音となる半角カタカナ。</summary>
         internal const string SemiVoiceableHalfKatakanas = "ﾊﾋﾌﾍﾎ";
@@ -43,11 +45,11 @@ namespace Zipangu
         static readonly IDictionary<char, char> HalfKatakanaToKatakanaMap = HalfKatakanas.ZipToDictionary(KatakanasByHalfKatakana);
 
         static readonly IDictionary<string, string> VoicedHiraganaMap =
-            VoiceableHalfKatakanas.Zip(VoicedHiraganas, (x, y) => new { k = $"{x}ﾞ", v = y.ToString() })
+            VoiceableHalfKatakanasForHiragana.Zip(VoicedHiraganas, (x, y) => new { k = $"{x}ﾞ", v = y.ToString() })
                 .Concat(SemiVoiceableHalfKatakanas.Zip(SemiVoicedHiraganas, (x, y) => new { k = $"{x}ﾟ", v = y.ToString() }))
                 .ToDictionary(_ => _.k, _ => _.v);
         static readonly IDictionary<string, string> VoicedKatakanaMap =
-            VoiceableHalfKatakanas.Zip(VoicedKatakanas, (x, y) => new { k = $"{x}ﾞ", v = y.ToString() })
+            VoiceableHalfKatakanasForKatakana.Zip(VoicedKatakanas, (x, y) => new { k = $"{x}ﾞ", v = y.ToString() })
                 .Concat(SemiVoiceableHalfKatakanas.Zip(SemiVoicedKatakanas, (x, y) => new { k = $"{x}ﾟ", v = y.ToString() }))
                 .ToDictionary(_ => _.k, _ => _.v);
 
