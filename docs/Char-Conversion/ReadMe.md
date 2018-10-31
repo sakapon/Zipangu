@@ -38,8 +38,10 @@ var result = "B'z".AsciiToWide();
 
 例
 ```c#
+// イスヾ 1ヵ月
+var result1 = "いすゞ 1ゕ月".HiraganaToKatakana();
 // ももいろくろーばーZ
-var result = "ももいろクローバーZ".KatakanaToHiragana();
+var result2 = "ももいろクローバーZ".KatakanaToHiragana();
 ```
 
 ### 半角カタカナ
