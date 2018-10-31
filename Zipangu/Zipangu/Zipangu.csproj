@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net40</TargetFrameworks>
-    <Version>1.1.6</Version>
+    <Version>1.1.8</Version>
     <Title>Zipangu</Title>
     <AssemblyTitle>Zipangu</AssemblyTitle>
     <Product>KLibrary</Product>
@@ -13,7 +13,7 @@
     <PackageProjectUrl>https://github.com/sakapon/Zipangu</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/sakapon/Zipangu/blob/master/LICENSE</PackageLicenseUrl>
     <PackageTags>Japan Kana Conversion Encoding</PackageTags>
-    <PackageReleaseNotes>文字エンコーディングのプロパティを追加。</PackageReleaseNotes>
+    <PackageReleaseNotes>変換される文字を追加。</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
