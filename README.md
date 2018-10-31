@@ -70,6 +70,7 @@ var result = EncodingHelper.ShiftJIS.GetBytes("ｼｬ乱Q");
 - [System.Text.Encoding.CodePages](https://www.nuget.org/packages/System.Text.Encoding.CodePages/) (.NET Standard 2.0)
 
 ## Release Notes
+- **v1.1.8** 変換される文字を追加。
 - **v1.1.6** 文字エンコーディングのプロパティを追加。
 - **v1.0.3** 初版リリース。
 - **v1.0.1** β版リリース。
